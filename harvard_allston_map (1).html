@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harvard's Land Acquisition in Allston-Brighton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --crimson: #A51C30;
+  --crimson-dark: #7a1323;
+  --crimson-light: #d4697a;
+  --ink: #1a1208;
+  --paper: #f5f0e8;
+  --gold: #c9a84c;
+}
+html { scroll-behavior: smooth; }
+body { font-family: "Source Serif 4", Georgia, serif; background: var(--ink); color: var(--ink); overflow-x: hidden; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 8vh;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 65% 40%, rgba(165,28,48,0.3) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 50%);
+}
+.hero-content { position: relative; z-index: 1; padding: 0 8vw; }
+.hero-kicker {
+  font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-kicker::before { content:''; display:block; width:2rem; height:1px; background:var(--gold); }
+.hero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 900; line-height: 1.0;
+  color: #f5f0e8; max-width: 16ch; margin-bottom: 1.5rem;
+}
+.hero h1 em { font-style: italic; color: var(--crimson-light); }
+.hero-deck {
+  font-size: clamp(1rem, 1.6vw, 1.2rem); font-weight: 300;
+  color: rgba(245,240,232,0.65); max-width: 58ch;
+  line-height: 1.75; margin-bottom: 2.5rem;
+}
+.hero-byline {
+  font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(245,240,232,0.35); padding-top: 1.5rem;
+  border-top: 1px solid rgba(245,240,232,0.1); display: inline-block;
+}
+.scroll-cue {
+  position: absolute; bottom: 2.5rem; right: 8vw;
+  writing-mode: vertical-rl; font-size: 0.65rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(245,240,232,0.25);
+  display: flex; align-items: center; gap: 1rem;
+}
+.scroll-cue::after {
+  content:''; width:1px; height:60px;
+  background: linear-gradient(to bottom, rgba(245,240,232,0.25), transparent);
+  animation: grow 2s ease-in-out infinite;
+}
+@keyframes grow { 0%,100%{height:40px;opacity:0.3} 50%{height:70px;opacity:0.6} }
+
+/* ── INTRO TEXT ── */
+.text-section {
+  background: var(--paper);
+  padding: 8vh 8vw;
+}
+.text-section.centered { max-width: 860px; margin: 0 auto; }
+.text-section.dark { background: var(--ink); max-width: 100%; }
+.text-section.dark p, .text-section.dark h2 { color: rgba(245,240,232,0.75); }
+.section-label {
+  font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--crimson); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.section-label::before { content:''; display:block; width:1.5rem; height:1px; background:var(--crimson); }
+.text-section.dark .section-label { color: var(--gold); }
+.text-section.dark .section-label::before { background: var(--gold); }
+h2 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700; line-height: 1.25;
+  margin-bottom: 1.5rem; color: var(--ink);
+}
+p {
+  font-size: 1.05rem; line-height: 1.85;
+  font-weight: 300; color: #3a3020; margin-bottom: 1.2rem;
+}
+.pull-quote {
+  border-left: 3px solid var(--crimson);
+  padding: 1rem 1.5rem; margin: 2rem 0;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-style: italic; color: var(--ink); line-height: 1.5;
+}
+.pull-quote cite {
+  display: block; font-style: normal;
+  font-family: "Source Serif 4", serif;
+  font-size: 0.75rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--crimson); margin-top: 0.8rem;
+}
+.text-section.dark .pull-quote { color: rgba(245,240,232,0.85); border-color: var(--gold); }
+.text-section.dark .pull-quote cite { color: var(--gold); }
+.stats-row {
+  display: flex; gap: 0;
+  border-top: 1px solid rgba(165,28,48,0.2);
+  border-bottom: 1px solid rgba(165,28,48,0.2);
+  margin: 2.5rem 0;
+}
+.stat-block {
+  flex: 1; padding: 1.5rem 1rem;
+  border-right: 1px solid rgba(165,28,48,0.15);
+}
+.stat-block:last-child { border-right: none; }
+.stat-n { font-family:"Playfair Display",serif; font-size:2.2rem; font-weight:900; color:var(--crimson); line-height:1; }
+.stat-l { font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:#7a6a50; margin-top:0.3rem; }
+
+/* ── SCROLLYTELLING ── */
+.scroll-story {
+  position: relative;
+}
+
+/* The sticky map wrapper — full viewport height, stays fixed while panels scroll over */
+.map-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+  /* pull up so first panel overlaps it immediately */
+  margin-bottom: -100vh;
+}
+
+/* Make the Datawrapper iframe fill the sticky container */
+.map-sticky-wrapper iframe {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  border: none;
+  display: block;
+  pointer-events: none; /* panels scroll freely over it */
+}
+
+/* Panels scroll over the sticky map */
+.panels-wrapper {
+  position: relative;
+  z-index: 2;
+  pointer-events: none; /* transparent to map mouse events by default */
+}
+
+.panel {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6vh 5vw;
+  pointer-events: none;
+}
+/* Alternate cards left/right */
+.panel:nth-child(odd)  { justify-content: flex-start; }
+.panel:nth-child(even) { justify-content: flex-end; }
+
+.panel-card {
+  background: rgba(245,240,232,0.96);
+  border-top: 3px solid var(--crimson);
+  padding: 2rem 2.2rem;
+  width: min(380px, 42vw);
+  pointer-events: auto;
+  box-shadow: 0 12px 48px rgba(26,18,8,0.25);
+  backdrop-filter: blur(4px);
+}
+.card-era {
+  font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--crimson); margin-bottom: 0.8rem;
+}
+.card-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.35rem; font-weight: 700; line-height: 1.25;
+  color: var(--ink); margin-bottom: 0.9rem;
+}
+.card-body {
+  font-size: 0.88rem; line-height: 1.8;
+  color: #3a3020; font-weight: 300;
+}
+.card-body p { font-size: 0.88rem; margin-bottom: 0.6rem; color: #3a3020; }
+.card-quote {
+  font-family: "Playfair Display", serif;
+  font-size: 0.9rem; font-style: italic;
+  color: var(--crimson-dark); line-height: 1.6;
+  border-left: 2px solid var(--crimson);
+  padding-left: 0.8rem; margin-top: 1rem;
+}
+.card-cite {
+  font-style: normal; font-family: "Source Serif 4", serif;
+  font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #7a6a50; display: block; margin-top: 0.4rem;
+}
+.card-stats {
+  display: flex; gap: 1rem; margin-top: 1.2rem;
+  padding-top: 1rem; border-top: 1px solid rgba(165,28,48,0.15);
+}
+.cs-num { font-family:"Playfair Display",serif; font-size:1.5rem; font-weight:900; color:var(--crimson); line-height:1; }
+.cs-lbl { font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:#7a6a50; margin-top:0.2rem; }
+
+/* ── BRIDGE / OUTRO ── */
+.outro {
+  background: var(--ink);
+  padding: 12vh 8vw;
+  position: relative; z-index: 3;
+}
+.outro-inner { max-width: 720px; }
+.outro h2 { font-family:"Playfair Display",serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:900; color:#f5f0e8; margin-bottom:1.5rem; line-height:1.2; }
+.outro p { font-size:1rem; line-height:1.85; color:rgba(245,240,232,0.6); font-weight:300; margin-bottom:1rem; }
+.outro-quote {
+  border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 2.5rem 0;
+  font-family:"Playfair Display",serif; font-size:1.2rem; font-style:italic;
+  color:rgba(245,240,232,0.85); line-height:1.6;
+}
+.outro-quote cite { font-style:normal; font-family:"Source Serif 4",serif; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); display:block; margin-top:0.6rem; }
+.source-line { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(245,240,232,0.25); margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(245,240,232,0.08); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-kicker">An investigation into urban land acquisition</div>
+    <h1>Harvard's <em>quiet</em> takeover of Allston</h1>
+    <p class="hero-deck">Over six decades, Harvard University assembled more than 200 acres across the Charles River — block by block, parcel by parcel — transforming a working-class neighborhood into the university's next great expansion.</p>
+    <div class="hero-byline">By Thamini Vijeyasingam</div>
+  </div>
+  <div class="scroll-cue">Scroll to explore</div>
+</section>
+
+<!-- INTRO TEXT -->
+<div class="text-section centered">
+  <div class="section-label">Background</div>
+  <h2>A neighborhood shaped by institutional ambition</h2>
+  <p>Allston and Brighton were a part of Cambridge for more than 160 years until the town seceded in 1807. Between 1875 and 1925, the population grew by more than 40,000. Harvard took its first steps into the area during this period, opening Harvard Stadium in 1903 and Harvard Business School in 1927.</p>
+  <p>Since its first major land purchase in 1989, Harvard has come to own nearly one-third of the land in Allston — from academic buildings to commercial properties and empty lots. Of the nearly 360 acres in Harvard's possession, almost 100 sit undeveloped.</p>
+  <div class="pull-quote">
+    "Institutional expansion in Allston and in Brighton has been a thorn."
+    <cite>— Daniel O. "Dan" Mee '81, lifelong Allston resident</cite>
+  </div>
+  <div class="stats-row">
+    <div class="stat-block"><div class="stat-n">⅓</div><div class="stat-l">Of Allston land owned by Harvard</div></div>
+    <div class="stat-block"><div class="stat-n">360</div><div class="stat-l">Acres in Harvard's possession</div></div>
+    <div class="stat-block"><div class="stat-n">~100</div><div class="stat-l">Acres still undeveloped</div></div>
+  </div>
+  <p>Scroll through the map below to trace how Harvard assembled its Allston footprint — era by era.</p>
+</div>
+
+<!-- SCROLLYTELLING: sticky map + floating panels -->
+<div class="scroll-story">
+
+  <!-- Datawrapper map — stays sticky behind panels -->
+  <div class="map-sticky-wrapper">
+    <iframe title="Harvard's Landholdings in Allston" aria-label="Locator map"
+      id="datawrapper-chart-7qxsz"
+      src="https://datawrapper.dwcdn.net/7qxsz/1/"
+      scrolling="no" frameborder="0"
+      style="width:0;min-width:100%!important;border:none;"
+      height="519" data-external="1">
+    </iframe>
+  </div>
+
+  <!-- Panels float over the map -->
+  <div class="panels-wrapper">
+
+    <div class="panel">
+      <div class="panel-card">
+        <div class="card-era">Overview · All parcels</div>
+        <div class="card-title">A century of accumulation</div>
+        <div class="card-body">
+          <p>Harvard's Allston landholdings span nearly a century — from early athletic facilities in the 1920s to a massive real estate play that reshaped the neighborhood's future.</p>
+          <p>Each shaded parcel represents a piece of Allston that Harvard acquired. Hover any parcel to see its address, acquisition year, and owner.</p>
+        </div>
+        <div class="card-stats">
+          <div><div class="cs-num">200+</div><div class="cs-lbl">Acres total</div></div>
+          <div><div class="cs-num">1897</div><div class="cs-lbl">Earliest holding</div></div>
+          <div><div class="cs-num">2025</div><div class="cs-lbl">Latest acquisition</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-card">
+        <div class="card-era">1897–1979 · Early holdings</div>
+        <div class="card-title">The athletic campus takes shape</div>
+        <div class="card-body">
+          <p>Harvard's presence in Allston began with its athletic and educational campus. The Stadium opened in 1903, Harvard Business School in 1927.</p>
+          <p>For decades, Harvard's footprint was restricted largely to parcels donated or acquired to expand the HBS campus and athletic facilities across the river.</p>
+        </div>
+        <div class="card-stats">
+          <div><div class="cs-num">1903</div><div class="cs-lbl">Stadium opens</div></div>
+          <div><div class="cs-num">1927</div><div class="cs-lbl">HBS established</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-card">
+        <div class="card-era">1980–1999 · The anonymous buyer</div>
+        <div class="card-title">Harvard buys through a proxy — and nobody notices</div>
+        <div class="card-body">
+          <p>In 1989, Harvard quietly began a rapid expansion of its Allston landholdings, acquiring parcels through the Beal Company — a Boston developer — to avoid being charged a premium.</p>
+          <p>Through this arrangement, Harvard accrued nearly 53 acres in just eight years, spending almost $90 million. It wasn't until 1997 that the anonymous acquisitions came to light.</p>
+        </div>
+        <div class="card-quote">
+          "It wasn't a bad relationship — they didn't have a relationship, and that reflects a historic failing of many urban universities."
+          <cite>— Paul Grogan, Harvard's Office of Government & Community Affairs</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-card">
+        <div class="card-era">2000–2009 · The quiet sweep</div>
+        <div class="card-title">32 parcels. A decade. Almost no one noticed.</div>
+        <div class="card-body">
+          <p>Under President Lawrence Summers, Harvard set its sights on making Allston the "Silicon Valley of the East" — a biotech campus to rival Kendall Square and the Seaport.</p>
+          <p>Harvard spent the 2000s aggressively buying residential and commercial properties along Western Avenue, Travis Street, and Seattle Street, often through LLCs.</p>
+        </div>
+        <div class="card-quote">
+          "If we take full advantage of a physical opportunity across the river in Allston — an opportunity to create a campus several times as large as this whole yard — we will have earned the gratitude of future generations."
+          <cite>— President Lawrence Summers, inaugural address, 2001</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-card">
+        <div class="card-era">2010–2014 · Consolidation</div>
+        <div class="card-title">A financial crisis — and a demolished neighborhood</div>
+        <div class="card-body">
+          <p>After the 2008 financial crisis forced Harvard to pause its expansion, the university continued assembling land more quietly.</p>
+          <p>The Charlesview Apartments — home to hundreds of Allston families — were demolished after Harvard and Charlesview agreed to a parcel swap, providing $65 million toward new residences further down Western Avenue.</p>
+        </div>
+        <div class="card-quote">
+          "I remember as a kid, my parents were driving down the area. People had these bed sheets hanging out. They wrote, 'I won't leave my home.'"
+          <cite>— Dan Mee '81, recalling the 1961 Barry's Corner redevelopment</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-card">
+        <div class="card-era">2015–2025 · Beacon Yards</div>
+        <div class="card-title">The $226 million endgame</div>
+        <div class="card-body">
+          <p>In just three years, Harvard spent over $226 million acquiring the former Massachusetts Turnpike rail yards — 68 acres between Western Avenue and the Charles River.</p>
+          <p>As of 2025, only 14 of the 36-acre Enterprise Research Campus have been developed. Nearly 100 acres of Harvard's total Allston holdings remain untouched.</p>
+        </div>
+        <div class="card-quote">
+          "Harvard, for its own academic and research purposes, doesn't need all the land that it acquired."
+          <cite>— Alex Krieger, Harvard Graduate School of Design</cite>
+        </div>
+        <div class="card-stats">
+          <div><div class="cs-num">68ac</div><div class="cs-lbl">Acquired in 3 years</div></div>
+          <div><div class="cs-num">$226M</div><div class="cs-lbl">Total paid</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /panels-wrapper -->
+</div><!-- /scroll-story -->
+
+<!-- BRIDGE TEXT -->
+<div class="text-section centered">
+  <div class="section-label">Community impact</div>
+  <h2>A neighborhood shaped — and strained</h2>
+  <p>The changes to Allston have reshaped the make-up of its residents. The neighborhood is historically diverse — with a large immigrant population — and home to a vibrant music and art scene. But over the years, the lack of housing supply and creeping rents pushed many families out.</p>
+  <p>Boston Public Schools shuttered the Jackson Mann K-8 school in 2024. Mary Lyon Pilot High School will close this June. The neighborhood still lacks a fully functioning community center.</p>
+  <div class="pull-quote">
+    "There were parking lots, housing, and some small businesses up and down Western Avenue. It was a place where you start. A lot of potential for development."
+    <cite>— Andrew O'Brien, Harvard Business School Chief Operating Officer</cite>
+  </div>
+  <p>Last October, Harvard sold the seven-acre Brighton Mills Retail Plaza — its first land sale in Massachusetts in a decade. In a statement, spokesperson Amy Kamosa wrote that no new acquisitions have been facilitated in approximately 20 years.</p>
+</div>
+
+<!-- DARK SECTION -->
+<div class="text-section dark">
+  <div style="max-width:720px;margin:0 auto;">
+    <div class="section-label">The reckoning</div>
+    <h2 style="color:#f5f0e8;">An about-face — and an unfinished promise</h2>
+    <p>A long-promised greenway connecting Rena Park to the Charles River has been in planning for two decades. It is now in its final stages of construction — but critics say it cuts short at an HBS parking lot, falling well short of the original design.</p>
+    <div class="pull-quote">
+      "Unless and until Harvard decides to complete its Greenway promise, that space will seem as if it belongs to the ERC rather than belonging to the broader neighborhood."
+      <cite>— Alex Krieger, Harvard Graduate School of Design</cite>
+    </div>
+    <p>Harvard has been able to fill in some gaps — the Ed Portal provides free after-school programming, and new retail along Western Avenue has given the corridor new life. But as the largest sole landowner in Allston, residents have looked to Harvard to play a larger role in making the neighborhood more vibrant and affordable.</p>
+    <p style="color:rgba(245,240,232,0.65);">"As we look ahead, Harvard is taking a phased, intentional approach to development in this area," spokesperson Amy Kamosa wrote.</p>
+  </div>
+</div>
+
+<!-- OUTRO -->
+<section class="outro">
+  <div class="outro-inner">
+    <h2>A neighborhood in negotiation</h2>
+    <p>Harvard's Allston holdings now encompass the Business School campus, the athletic complex, the Enterprise Research Campus, and the vast undeveloped Beacon Yards site. New retail — Molly's Bookstore, FiDO Pizza, Park Bagelry — has arrived along Western Avenue with Allston Labworks.</p>
+    <p>Residents, city officials, and the university continue to negotiate through the Article 80 process and the Harvard Allston Task Force what kind of neighborhood Allston will become.</p>
+    <div class="outro-quote">
+      "I get nostalgic. But I get it — you just have to look. Allston looks a lot better today than it did 30, 40 years ago."
+      <cite>— Daniel O. "Dan" Mee '81, lifelong Allston resident</cite>
+    </div>
+    <div class="source-line">Sources: MassGIS · Suffolk County Registry of Deeds · Boston Assessing Department · Harvard Planning & Project Management · Reporting by Thamini Vijeyasingam</div>
+  </div>
+</section>
+
+<script>
+// Resize Datawrapper iframe to fill its container
+(function(){
+  function resizeDW(){
+    var iframe = document.getElementById("datawrapper-chart-7qxsz");
+    if(iframe){
+      iframe.style.height = "100%";
+      iframe.style.minHeight = "100%";
+    }
+  }
+  resizeDW();
+  window.addEventListener("message", function(e){
+    if(e.data["datawrapper-height"] !== void 0){
+      var t = document.querySelectorAll("iframe");
+      for(var n in e.data["datawrapper-height"])
+        for(var r=0,i;i=t[r];r++)
+          if(i.contentWindow===e.source){
+            i.style.height = "100%";
+          }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
